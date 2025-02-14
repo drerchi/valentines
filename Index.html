@@ -33,11 +33,6 @@
             margin-bottom: 30px;
         }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 15px #ff4d6d, 0 0 20px #ff2e63; }
-            to { text-shadow: 0 0 25px #ff007f, 0 0 30px #ff0062; }
-        }
-
         .button {
             padding: 15px 25px;
             font-size: 18px;
@@ -55,12 +50,11 @@
             transform: scale(1.1);
         }
 
-        .heart {
+        .floating {
             position: absolute;
-            color: red;
             font-size: 20px;
-            animation: float 6s linear infinite, swing 2s ease-in-out infinite alternate;
             opacity: 0.8;
+            animation: float 6s linear infinite, swing 2s ease-in-out infinite alternate;
         }
 
         @keyframes float {
@@ -82,43 +76,46 @@
 
     <script>
         let animationMode = 0;
+        let currentSymbol = "❤️";
 
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.innerHTML = "❤️";
-            heart.classList.add("heart");
-            document.body.appendChild(heart);
+        function createFloatingElement() {
+            const element = document.createElement("div");
+            element.innerHTML = currentSymbol;
+            element.classList.add("floating");
+            document.body.appendChild(element);
 
             const size = Math.random() * 30 + 10;
-            heart.style.fontSize = size + "px";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 4 + 3 + "s";
+            element.style.fontSize = size + "px";
+            element.style.left = Math.random() * 100 + "vw";
+            element.style.animationDuration = Math.random() * 4 + 3 + "s";
 
             setTimeout(() => {
-                heart.remove();
+                element.remove();
             }, 6000);
         }
 
-        setInterval(createHeart, 200);
+        setInterval(createFloatingElement, 200);
 
         function changeAnimation() {
             animationMode = (animationMode + 1) % 3;
-
             const title = document.getElementById("title");
             const loveText = document.getElementById("loveText");
 
             if (animationMode === 1) {
-                document.body.style.background = "linear-gradient(to right, #ff0000, #ff7300)";
+                document.body.style.background = "linear-gradient(to right, #ff8c00, #ffd700)";
                 title.innerText = "Маринка, ти моє Сонечко ☀️";
                 loveText.innerText = "Ти випромінюєш тепло і радість, як справжнє сонце, і зігріваєш моє серце.";
+                currentSymbol = "☀️";
             } else if (animationMode === 2) {
                 document.body.style.background = "linear-gradient(to left, #6a11cb, #2575fc)";
                 title.innerText = "Маринка, ти моя Зірочка ✨";
                 loveText.innerText = "Ти освітлюєш моє життя своїм сяйвом, навіть у найтемніші дні.";
+                currentSymbol = "✨";
             } else {
                 document.body.style.background = "radial-gradient(circle, #ff1e56, #ffac41)";
                 title.innerText = "Маринка, ти моє серденько! ❤️";
                 loveText.innerText = "Я кохаю тебе, бо ти робиш моє життя яскравим і наповненим щастям.";
+                currentSymbol = "❤️";
             }
         }
     </script>
