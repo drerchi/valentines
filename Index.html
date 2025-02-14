@@ -52,7 +52,6 @@
 
         .floating {
             position: absolute;
-            font-size: 20px;
             opacity: 0.8;
             animation: float 6s linear infinite, swing 2s ease-in-out infinite alternate;
         }
@@ -84,10 +83,10 @@
             element.classList.add("floating");
             document.body.appendChild(element);
 
-            const size = Math.random() * 30 + 10;
+            const size = Math.random() * 40 + 40; // Розмір від 40px до 80px
             element.style.fontSize = size + "px";
             element.style.left = Math.random() * 100 + "vw";
-            element.style.top = Math.random() * 100 + "vh";  // Рандомно по висоті екрану
+            element.style.top = Math.random() * 100 + "vh";  // Рандомно по всій висоті екрану
             element.style.animationDuration = Math.random() * 4 + 3 + "s";
 
             setTimeout(() => {
@@ -95,7 +94,7 @@
             }, 6000);
         }
 
-        setInterval(createFloatingElement, 200);
+        setInterval(createFloatingElement, 100); // Поява кожні 100ms
 
         function changeAnimation() {
             animationMode = (animationMode + 1) % 3;
