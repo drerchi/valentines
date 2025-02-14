@@ -3,106 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>З Днем Валентина, Маринка!</title>
+    <title>Для Маринки ❤️</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffcccc;
-            text-align: center;
-            overflow: hidden;
             margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            margin-top: 15%;
+            overflow: hidden;
+            background: radial-gradient(circle, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: "Arial", sans-serif;
+            text-align: center;
+            color: white;
+            flex-direction: column;
         }
 
         h1 {
-            font-size: 36px;
-            color: #ff4d4d;
-            animation: pulse 2s infinite alternate;
+            position: relative;
+            z-index: 10;
+            font-size: 3.5em;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            animation: glow 2s infinite alternate;
         }
 
-        .message {
-            font-size: 20px;
-            color: #d40000;
-            margin-bottom: 20px;
-        }
-
-        button {
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: background 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #d40000;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
-
-        /* Анімація сердечок */
-        .hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff2e63; }
+            to { text-shadow: 0 0 20px #ff007f, 0 0 30px #ff0062; }
         }
 
         .heart {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background: red;
-            clip-path: polygon(50% 0%, 100% 30%, 75% 100%, 50% 80%, 25% 100%, 0% 30%);
+            color: red;
+            font-size: 20px;
+            animation: float 6s linear infinite, swing 2s ease-in-out infinite alternate;
             opacity: 0.8;
-            animation: float 4s linear infinite;
         }
 
         @keyframes float {
-            0% { transform: translateY(0) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        @keyframes swing {
+            from { transform: rotate(-10deg); }
+            to { transform: rotate(10deg); }
+        }
+
+        .falling-heart {
+            position: absolute;
+            color: pink;
+            font-size: 10px;
+            animation: fall 4s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-5vh) translateX(0); opacity: 1; }
+            100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+        }
+
+        .button {
+            position: absolute;
+            bottom: 20px;
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            background: #ff4d6d;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: #ff2e63;
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>З Днем Святого Валентина, Маринка! ❤️</h1>
-        <p class="message">Ти неймовірна! Бажаю тобі багато радості, щастя та любові! 💕</p>
-        <button id="surpriseButton">Натисни мене!</button>
-    </div>
-
-    <div class="hearts-container"></div>
+    <h1>Маринка, ти моє серденько! ❤️</h1>
+    <button class="button" onclick="changeAnimation()">Змінити магію ✨</button>
 
     <script>
-        document.getElementById("surpriseButton").addEventListener("click", function() {
-            alert("Ти найдорожча людина! 💖");
-        });
+        let animationMode = 0;
 
         function createHeart() {
             const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
             heart.classList.add("heart");
+            document.body.appendChild(heart);
+
+            const size = Math.random() * 30 + 10;
+            heart.style.fontSize = size + "px";
             heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-            document.querySelector(".hearts-container").appendChild(heart);
+            heart.style.animationDuration = Math.random() * 4 + 3 + "s";
 
             setTimeout(() => {
                 heart.remove();
-            }, 4000);
+            }, 6000);
+        }
+
+        function createFallingHeart() {
+            const fallingHeart = document.createElement("div");
+            fallingHeart.innerHTML = "💖";
+            fallingHeart.classList.add("falling-heart");
+            document.body.appendChild(fallingHeart);
+
+            const size = Math.random() * 15 + 5;
+            fallingHeart.style.fontSize = size + "px";
+            fallingHeart.style.left = Math.random() * 100 + "vw";
+            fallingHeart.style.animationDuration = Math.random() * 5 + 3 + "s";
+
+            setTimeout(() => {
+                fallingHeart.remove();
+            }, 5000);
         }
 
         setInterval(createHeart, 200);
+        setInterval(createFallingHeart, 100);
+
+        function changeAnimation() {
+            animationMode = (animationMode + 1) % 3;
+
+            if (animationMode === 1) {
+                document.body.style.background = "linear-gradient(to right, #ff758c, #ff7eb3)";
+                document.querySelector("h1").innerText = "Маринка, ти моє сонечко ☀️";
+            } else if (animationMode === 2) {
+                document.body.style.background = "linear-gradient(to left, #ff9a9e, #fad0c4)";
+                document.querySelector("h1").innerText = "Маринка, ти моя зірочка ✨";
+            } else {
+                document.body.style.background = "radial-gradient(circle, #ff758c, #ff7eb3)";
+                document.querySelector("h1").innerText = "Маринка, ти моє серденько! ❤️";
+            }
+        }
     </script>
 </body>
 </html>
